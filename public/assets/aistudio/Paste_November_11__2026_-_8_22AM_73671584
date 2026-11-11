@@ -1,0 +1,1338 @@
+MASTER DEVELOPMENT PROMPT — CONTINUITYOS
+
+Build a Complete, Professional, Judge-Ready Knowledge Continuity Platform
+
+Act as a Senior Software Architect, Principal Full-Stack Engineer, Product Designer, UX Researcher and AI Engineer at a leading global technology company.
+
+Your task is to design and develop a complete, functional, production-minded MVP called ContinuityOS.
+
+This is a real hackathon submission. Do not build a generic AI dashboard, a static prototype, a collection of disconnected screens, or a website that merely looks impressive in screenshots.
+
+Build a working application that solves the actual problem, has a coherent user journey, uses real data processing, and can be demonstrated to hackathon judges.
+
+The application must be understandable to a first-time user, technically credible to experienced developers, and visually polished enough to resemble a carefully designed commercial SaaS product.
+
+---
+
+PART 1 — UNDERSTAND THE HACKATHON CHALLENGE
+
+Official problem statement:
+
+"Prevent Critical Knowledge From Leaving With People."
+
+One-line challenge:
+
+Build a system that converts scattered project activity into a usable handover when a team member leaves.
+
+The problem:
+
+When employees, volunteers or student team members leave a project, important knowledge disappears with them.
+
+Documents may exist, but the reasoning behind decisions, unfinished work, dependencies, recurring problems and important contacts are scattered across:
+
+- Project documents.
+- Messages and communication records.
+- Code repositories.
+- Meeting notes.
+- Task boards.
+- Project reports.
+
+Develop a platform that reconstructs the current state of a project from authorised sources.
+
+The platform must identify:
+
+1. Important decisions and their reasoning.
+2. Unresolved questions.
+3. Responsibilities and task ownership.
+4. Risks and blockers.
+5. Dependencies.
+6. Recurring problems.
+7. Important contacts.
+8. Recommended next actions.
+
+Every generated summary must link to its supporting source.
+
+The application must explicitly identify:
+
+- Missing evidence.
+- Conflicting information.
+- Uncertain claims.
+- Unverified assumptions.
+
+Users must be able to review, correct, reject and approve the generated handover before sharing it.
+
+The incoming person must only see information they are authorised to access.
+
+Core product philosophy: Automation with human control, traceability and permission-aware knowledge sharing.
+
+Do not change this problem statement into a generic employee management or task management application.
+
+PART 2 — THE PRODUCT VISION
+
+Product name: CONTINUITYOS
+
+Tagline: Knowledge stays. Work moves forward.
+
+Product description:
+
+ContinuityOS is an intelligent knowledge continuity platform that reconstructs project knowledge from authorised documents and activity records, identifies what might be lost when someone leaves, and generates an evidence-backed handover for the next responsible person.
+
+The product should support two main experiences:
+
+A. Project owner / outgoing employee:
+
+- Upload authorised project information.
+- Review extracted knowledge.
+- Identify missing information.
+- Correct inaccurate findings.
+- Approve the handover.
+- Share it with an authorised successor.
+
+B. Incoming employee / successor:
+
+- Access the approved handover.
+- Understand project history.
+- Explore important decisions.
+- Identify pending responsibilities.
+- Understand dependencies and risks.
+- Follow a structured continuation plan.
+- Acknowledge receipt of the handover.
+
+The product must make the transition between these two users seamless.
+
+PART 3 — TECHNOLOGY STACK
+
+Use the following stack unless a documented compatibility issue requires a justified alternative.
+
+Frontend:
+
+- Next.js with App Router.
+- React.
+- TypeScript in strict mode.
+- Tailwind CSS.
+- shadcn/ui.
+- Lucide React icons.
+- Recharts for meaningful data visualisations.
+
+Backend:
+
+- Next.js server-side API routes.
+- Server-side business logic.
+- Prisma ORM.
+- SQLite for a simple, locally deployable MVP.
+- Design the data access layer so PostgreSQL can replace SQLite later.
+
+AI:
+
+- Google Gemini API.
+- Keep API calls on the server.
+- Use structured JSON outputs and schema validation.
+- Implement robust error handling.
+- Provide a deterministic local fallback when the API key is missing or the API fails.
+- Never fabricate an AI-generated analysis and present it as real evidence.
+
+Document processing:
+
+- PDF extraction.
+- DOCX extraction.
+- TXT and Markdown extraction.
+- CSV extraction.
+- Preserve document names, page numbers where available, headings, relevant excerpts and source identifiers.
+
+Validation:
+
+- Zod.
+
+Testing:
+
+- Vitest for unit tests.
+- Playwright for essential end-to-end journeys where feasible.
+
+Package manager:
+
+- Use npm by default for compatibility with the development environment.
+
+Do not introduce microservices, Docker orchestration, Kubernetes or unnecessary cloud infrastructure for this MVP.
+
+PART 4 — PROFESSIONAL BRAND IDENTITY
+
+Create a distinctive and professional visual identity for ContinuityOS.
+
+Do not use an ordinary generic AI logo.
+
+LOGO REQUIREMENTS:
+
+Create a custom vector SVG logo.
+
+The symbol should combine three meaningful visual ideas:
+
+1. Continuity — an unbroken connection.
+2. Knowledge — a structured document or connected nodes.
+3. Handover — movement from one person to another.
+
+Design direction:
+
+- Geometric, minimal and memorable.
+- A connected-loop or interlocking-path symbol.
+- Clean geometry.
+- Distinctive silhouette.
+- Professional typography.
+- The wordmark CONTINUITYOS beside the symbol.
+
+Create:
+
+- Main horizontal logo.
+- Compact icon-only logo.
+- Light-background version.
+- Dark-background version.
+- Favicon.
+
+Place logo assets in a dedicated public/brand directory.
+
+Prefer actual SVG files, not emoji, text symbols or externally hosted images.
+
+The logo should look like the identity of a serious enterprise software company.
+
+PART 5 — VISUAL DESIGN SYSTEM
+
+The website must look human-designed, sophisticated and professionally art-directed.
+
+Avoid the common appearance of AI-generated websites.
+
+DESIGN PRINCIPLES:
+
+- Strong visual hierarchy.
+- Consistent spacing.
+- Deliberate typography.
+- Carefully aligned components.
+- Realistic enterprise dashboard layouts.
+- Clear information density.
+- Purposeful empty states.
+- Consistent iconography.
+- Subtle micro-interactions.
+- Functional buttons and controls.
+
+COLOUR SYSTEM:
+
+Use a sophisticated but energetic palette.
+
+Primary navy: #14213D
+Deep navy: #0B1730
+Teal: #16A394
+Bright cyan: #36B9D6
+Warm off-white: #F7F9F8
+White: #FFFFFF
+Soft grey: #E7ECEF
+Amber: #F2B544
+Coral: #E76F51
+Success green: #299D69
+Error red: #D9534F
+
+Apply a balanced 60-30-10 colour distribution:
+
+- 60% neutral backgrounds.
+- 30% primary structural colours.
+- 10% bright accent colours.
+
+Use bright colours purposefully for status indicators, actions, charts and important information.
+
+Do not make the entire application dark or overly colourful.
+
+STRICTLY AVOID:
+
+- Rainbow gradients.
+- Purple-blue AI gradients.
+- Excessive glassmorphism.
+- Neon effects.
+- Excessive rounded cards.
+- Huge decorative illustrations.
+- Random floating blobs.
+- Unnecessary animations.
+- Generic template-style dashboards.
+
+Use solid colour surfaces, thin borders, restrained shadows and carefully selected accent colours.
+
+PART 6 — INTERACTIVE DESIGN AND ACCESSIBILITY
+
+Implement:
+
+1. Working light/dark mode toggle.
+2. Collapsible sidebar.
+3. Responsive mobile navigation.
+4. Accessible dropdown menus.
+5. Working search.
+6. Filter controls.
+7. Functional tabs.
+8. Toast notifications.
+9. Loading indicators.
+10. Confirmation dialogs.
+11. Helpful tooltips.
+12. Keyboard-accessible interactions.
+
+Accessibility requirements:
+
+- Semantic HTML.
+- Keyboard navigation.
+- Visible focus indicators.
+- Accessible form labels.
+- Appropriate ARIA attributes.
+- Good colour contrast.
+- Screen-reader-friendly status updates.
+- Do not communicate important statuses using colour alone.
+- Respect reduced-motion preferences.
+
+The application must work on desktop, tablet and mobile.
+
+PART 7 — APPLICATION STRUCTURE
+
+Create a polished application shell.
+
+SIDEBAR:
+
+- Overview
+- Projects
+- Knowledge Sources
+- Decision Timeline
+- Continuity Risks
+- Handover Studio
+- My Handover
+- Team & Access
+- Activity Log
+- Settings
+
+TOP NAVIGATION:
+
+- Breadcrumbs.
+- Current project selector.
+- Search.
+- Notifications.
+- Help.
+- User profile.
+- Theme toggle.
+
+Every navigation item must work.
+
+Do not create links that lead to empty or nonexistent pages.
+
+PART 8 — REQUIRED FUNCTIONAL MODULES
+
+MODULE 1: AUTHENTICATION AND ONBOARDING
+
+Create a functional authentication experience.
+
+Include:
+
+- Sign in.
+- Demo account access.
+- Role-aware navigation.
+- User profile.
+- Sign out.
+- Basic session handling.
+
+Create a guided first-time experience explaining the five-stage workflow.
+
+Support these demo roles:
+
+1. Project Owner.
+2. Reviewer.
+3. Incoming Successor.
+4. Viewer.
+
+Enforce permissions on the server, not merely by hiding frontend elements.
+
+MODULE 2: PROJECT DASHBOARD
+
+Create an executive-style project overview.
+
+Display:
+
+- Active projects.
+- Uploaded sources.
+- Extracted decisions.
+- Unresolved questions.
+- Pending tasks.
+- Critical risks.
+- Dependencies.
+- Handover status.
+
+Create meaningful charts:
+
+- Knowledge distribution.
+- Decision activity over time.
+- Risk distribution.
+- Task status.
+
+Every metric must derive from actual stored application data.
+
+Do not display invented live statistics.
+
+Include:
+
+- Recent activity.
+- Pending approvals.
+- Recent sources.
+- Critical attention items.
+- A prominent "Create Handover" action.
+
+Use realistic synthetic demo data and clearly label it as demonstration data.
+
+MODULE 3: KNOWLEDGE SOURCE INGESTION
+
+This is one of the most important modules.
+
+Create a working document upload experience.
+
+Allow users to:
+
+- Drag and drop files.
+- Browse local files.
+- Upload multiple files.
+- View supported file types.
+- View upload progress.
+- Inspect processing status.
+- Preview extracted content.
+- Remove a source where permitted.
+
+Support:
+
+- PDF.
+- DOCX.
+- TXT.
+- MD.
+- CSV.
+
+For every source, store:
+
+- Unique source ID.
+- Original filename.
+- File type.
+- Uploading user.
+- Project ID.
+- Upload date.
+- Extracted text.
+- Processing status.
+- Permission classification.
+- Content checksum where appropriate.
+
+Prevent unsupported file types.
+
+Handle corrupt documents and extraction failures gracefully.
+
+Provide a visible source-processing status:
+
+- Uploaded.
+- Processing.
+- Processed.
+- Needs attention.
+- Failed.
+
+Do not claim that GitHub, Slack, Google Drive or other integrations are connected unless they are genuinely implemented.
+
+For this MVP, prioritise reliable local document ingestion.
+
+MODULE 4: KNOWLEDGE RECONSTRUCTION ENGINE
+
+Build the central intelligence engine.
+
+After document ingestion, analyse the authorised extracted content.
+
+Identify structured entities:
+
+A. Decisions:
+
+- Decision title.
+- Description.
+- Reasoning.
+- Decision maker, if evidenced.
+- Date, if available.
+- Supporting sources.
+- Confidence/evidence status.
+
+B. Tasks:
+
+- Task name.
+- Description.
+- Owner, if evidenced.
+- Deadline, if evidenced.
+- Current status.
+- Dependencies.
+- Source reference.
+
+C. Risks:
+
+- Risk description.
+- Severity.
+- Potential impact.
+- Supporting evidence.
+- Recommended mitigation.
+- Status.
+
+D. Dependencies:
+
+- Dependent task.
+- Required task or resource.
+- Relationship.
+- Supporting evidence.
+
+E. Unresolved questions:
+
+- Question.
+- Why it matters.
+- Related source.
+- Suggested person to verify, only if evidenced.
+
+F. Important contacts:
+
+- Name.
+- Role.
+- Context.
+- Source reference.
+
+G. Recurring problems:
+
+- Repeated issue.
+- Frequency where measurable.
+- Supporting evidence.
+- Potential impact.
+
+The engine must distinguish:
+
+VERIFIED:
+Directly supported by a source.
+
+INFERRED:
+A reasonable interpretation that requires confirmation.
+
+CONFLICTING:
+Multiple sources provide inconsistent information.
+
+MISSING:
+The required information was not found.
+
+UNKNOWN:
+The system cannot confidently establish the information.
+
+Never turn missing information into an invented fact.
+
+Every extracted item must retain its supporting source references.
+
+If an item has no supporting evidence, explicitly mark it as unsupported or missing.
+
+Use structured AI outputs validated with Zod.
+
+Use a deterministic rule-based fallback for basic extraction and analysis when the Gemini API is unavailable.
+
+MODULE 5: SOURCE EVIDENCE EXPLORER
+
+Build an important feature that differentiates ContinuityOS from ordinary AI summarisation tools.
+
+Every important claim should be clickable.
+
+When a user selects a claim:
+
+- Open its source panel.
+- Show the original document name.
+- Show the relevant excerpt.
+- Show page number or section where available.
+- Highlight the relevant text where technically possible.
+- Show the claim's verification status.
+- Show related decisions or tasks.
+
+Create an evidence coverage indicator.
+
+Clearly distinguish:
+
+- Supported claims.
+- Partially supported claims.
+- Unverified claims.
+- Conflicting claims.
+
+Do not use fake citations or random document references.
+
+A source citation must resolve to an actual stored source and an actual extracted excerpt.
+
+MODULE 6: DECISION TIMELINE
+
+Create a chronological reconstruction of project history.
+
+Show:
+
+- Important decisions.
+- Project changes.
+- Recorded discussions.
+- Task changes.
+- Unresolved decisions.
+- Important milestones.
+
+Each timeline entry should show:
+
+- Date or unknown date.
+- Event.
+- Context.
+- Evidence.
+- Verification status.
+
+Provide:
+
+- Chronological view.
+- Filter by event type.
+- Search.
+- Source preview.
+
+Never invent dates.
+
+MODULE 7: CONTINUITY RISK RADAR
+
+Build a useful risk analysis interface.
+
+Identify:
+
+- Tasks with no evidenced owner.
+- Critical unresolved questions.
+- Single-person knowledge dependencies.
+- Tasks blocked by unresolved dependencies.
+- Missing project documentation.
+- Conflicting project information.
+- Important decisions without supporting evidence.
+
+Create a risk severity model:
+
+- Critical.
+- High.
+- Medium.
+- Low.
+
+Explain why every risk has received its severity.
+
+Use transparent rules rather than presenting arbitrary AI-generated percentages as scientific risk scores.
+
+Include:
+
+- Risk description.
+- Evidence.
+- Impact.
+- Recommended action.
+- Responsible reviewer.
+- Resolution status.
+
+Allow authorised reviewers to mark risks as:
+
+- Open.
+- Under review.
+- Resolved.
+- Accepted.
+
+MODULE 8: DEPARTURE / ABSENCE DRILL
+
+Create a distinctive interactive feature.
+
+The project owner should be able to select a person or role and simulate their absence.
+
+The system should identify:
+
+- Tasks associated with that person.
+- Decisions relying on their knowledge.
+- Dependencies that could become blocked.
+- Unanswered questions.
+- Missing documentation.
+- Important contacts requiring verification.
+
+Display a clear impact assessment.
+
+Use this feature to answer:
+
+"What would happen to this project if this person became unavailable tomorrow?"
+
+Only associate tasks and decisions with people when the source supports that association.
+
+Mark uncertain associations clearly.
+
+MODULE 9: HANDOVER STUDIO
+
+This is the central product experience.
+
+Create a guided handover creation process.
+
+STEP 1: Select project.
+
+STEP 2: Select outgoing team member or departing role.
+
+STEP 3: Select authorised successor.
+
+STEP 4: Select the permitted information scope.
+
+STEP 5: Generate the draft handover.
+
+The handover must contain:
+
+1. Project overview.
+2. Current project status.
+3. Important decisions and reasoning.
+4. Pending tasks.
+5. Ownership and responsibilities.
+6. Risks and blockers.
+7. Dependencies.
+8. Unresolved questions.
+9. Important contacts.
+10. Recommended next actions.
+11. Missing knowledge.
+12. Evidence references.
+
+Generate a structured continuation plan.
+
+Every claim must link to its source evidence.
+
+Clearly mark:
+
+- Verified.
+- Inferred.
+- Conflicting.
+- Missing.
+
+Generate a role-appropriate handover.
+
+Never include confidential source information that the successor is not authorised to access.
+
+MODULE 10: HUMAN REVIEW AND APPROVAL
+
+Do not allow an AI-generated handover to be automatically treated as approved truth.
+
+Create a review interface.
+
+An authorised reviewer should be able to:
+
+- Edit generated content.
+- Approve claims.
+- Reject claims.
+- Add clarifications.
+- Assign unresolved questions.
+- Resolve conflicts.
+- Flag missing evidence.
+- Request regeneration.
+- Approve the complete handover.
+
+Maintain version history.
+
+Store:
+
+- Original generated draft.
+- Subsequent revisions.
+- Reviewer.
+- Approval status.
+- Approval timestamp.
+- Change summary.
+
+The handover must have these states:
+
+- Draft.
+- In Review.
+- Changes Requested.
+- Approved.
+- Shared.
+- Acknowledged.
+
+Prevent sharing before approval.
+
+MODULE 11: CONTROLLED HANDOVER SHARING
+
+Create a secure sharing workflow.
+
+Allow an authorised owner to select:
+
+- Incoming successor.
+- Role.
+- Information scope.
+- Expiry date, where appropriate.
+
+Provide:
+
+- Access-controlled handover page.
+- Handover summary.
+- Important actions.
+- Evidence links.
+- Restricted source previews.
+- Acknowledgement action.
+
+The incoming successor should be able to:
+
+- Read the handover.
+- Explore permitted evidence.
+- Mark actions as understood.
+- Ask questions.
+- Acknowledge receipt.
+- View the next-action checklist.
+
+Enforce authorisation at the server level on every protected operation.
+
+Do not expose confidential original source documents through unrestricted URLs.
+
+MODULE 12: SUCCESSOR READINESS
+
+Create a practical onboarding experience.
+
+Show:
+
+- What the successor already has access to.
+- What they must understand first.
+- Critical tasks.
+- Important decisions.
+- Pending questions.
+- Knowledge gaps.
+- Suggested next actions.
+
+Provide a guided checklist.
+
+The purpose is to help the incoming person continue the project without repeatedly asking the outgoing person for information.
+
+MODULE 13: ACTIVITY AND AUDIT LOG
+
+Record meaningful events:
+
+- Source upload.
+- Source deletion.
+- Knowledge extraction.
+- Claim correction.
+- Approval.
+- Handover creation.
+- Handover sharing.
+- Access changes.
+- Successor acknowledgement.
+
+Show actor, timestamp, event and relevant entity.
+
+Do not record sensitive document contents in ordinary activity logs.
+
+MODULE 14: SETTINGS AND ACCESS MANAGEMENT
+
+Provide:
+
+- User profile.
+- Team management.
+- Role management.
+- Project permissions.
+- Source permissions.
+- Notification preferences.
+- Theme settings.
+- Data retention information.
+
+Apply the principle of least privilege.
+
+A user's permission to access a project must not automatically grant access to every document within that project.
+
+PART 9 — USER EXPERIENCE
+
+Design the application around actual user tasks.
+
+The first-time user must be able to understand:
+
+1. What ContinuityOS does.
+2. Why they should upload documents.
+3. What happens after uploading.
+4. How the system verifies its findings.
+5. How to approve a handover.
+6. How the successor receives it.
+
+Include contextual guidance.
+
+Do not overwhelm the user with dozens of metrics.
+
+Use progressive disclosure: show essential information first, and detailed technical information when the user asks for it.
+
+Provide useful empty states.
+
+Every button must have a working action.
+
+Every form must validate input.
+
+Every tab must switch content.
+
+Every filter must actually filter.
+
+Every navigation item must lead to a functioning page.
+
+Do not use placeholder links, fake success notifications or buttons that do nothing.
+
+PART 10 — DATA MODEL
+
+Design a relational Prisma schema with appropriate relations.
+
+Include entities for:
+
+- User.
+- Team.
+- Membership.
+- Project.
+- ProjectMembership.
+- Source.
+- SourceExcerpt.
+- KnowledgeItem.
+- Decision.
+- Task.
+- Risk.
+- Dependency.
+- UnresolvedQuestion.
+- Contact.
+- Handover.
+- HandoverVersion.
+- HandoverClaim.
+- ReviewAction.
+- HandoverAccess.
+- Acknowledgement.
+- ActivityLog.
+- Notification.
+
+Include:
+
+- IDs.
+- Timestamps.
+- Appropriate indexes.
+- Foreign keys.
+- Status enums.
+- Permission relationships.
+
+Avoid duplicating information unnecessarily.
+
+Keep the schema understandable and maintainable.
+
+PART 11 — DEMONSTRATION DATA
+
+Create a clearly labelled synthetic demonstration project.
+
+Project name: Campus Innovation Portal.
+
+Scenario:
+
+A student project lead is leaving the team before final delivery.
+
+Available synthetic sources:
+
+1. Project kickoff meeting notes.
+2. Technical architecture document.
+3. Weekly progress report.
+4. Task ownership spreadsheet.
+5. Decision log.
+6. Bug and issue report.
+7. Handover discussion notes.
+
+These documents must contain realistic but fictional project information.
+
+Include deliberate examples of:
+
+- A documented decision.
+- A pending task.
+- A task with missing ownership.
+- A dependency.
+- A high-priority risk.
+- Two conflicting statements.
+- A missing deadline.
+- An important unresolved question.
+
+The platform should process these sources through the same ingestion and reconstruction workflow as user-uploaded files.
+
+Do not simply hardcode a finished handover and pretend it was generated.
+
+Include a reset-demo-data option for judges.
+
+PART 12 — THREE ROUND 3 IMPROVEMENTS
+
+Create a clearly visible section documenting three substantial future improvements.
+
+Commitment 1: Authorised external source integrations.
+
+Develop secure, permission-aware integrations for selected tools such as GitHub and Google Drive, with source synchronisation and revocation handling.
+
+Commitment 2: Advanced knowledge relationship mapping.
+
+Build a richer knowledge graph connecting decisions, people, tasks, dependencies and historical project changes.
+
+Commitment 3: Intelligent successor readiness.
+
+Introduce role-specific learning paths, knowledge gap prioritisation and measurable handover completion.
+
+Label these as planned improvements, not completed functionality.
+
+PART 13 — ARCHITECTURE AND PROJECT ORGANISATION
+
+Use a clean, scalable directory structure.
+
+Suggested structure:
+
+continuityos/
+public/
+brand/
+logo.svg
+logo-dark.svg
+icon.svg
+favicon.svg
+
+prisma/
+schema.prisma
+seed.ts
+
+src/
+app/
+(auth)/
+login/
+(dashboard)/
+overview/
+projects/
+sources/
+decisions/
+risks/
+handovers/
+successor/
+team/
+activity/
+settings/
+api/
+auth/
+projects/
+sources/
+analysis/
+handovers/
+reviews/
+permissions/
+notifications/
+
+components/
+  layout/
+  navigation/
+  dashboard/
+  sources/
+  evidence/
+  timeline/
+  risks/
+  handover/
+  successor/
+  shared/
+  ui/
+
+features/
+  authentication/
+  projects/
+  ingestion/
+  reconstruction/
+  evidence/
+  decisions/
+  risk-analysis/
+  handovers/
+  permissions/
+
+lib/
+  auth/
+  db/
+  ai/
+  validation/
+  permissions/
+  storage/
+  errors/
+  utils/
+
+server/
+  services/
+  repositories/
+  policies/
+
+types/
+
+tests/
+unit/
+integration/
+e2e/
+
+docs/
+architecture.md
+data-flow.md
+technical-decisions.md
+testing.md
+limitations.md
+round-3-roadmap.md
+ai-disclosure.md
+
+.env.example
+.gitignore
+README.md
+package.json
+tsconfig.json
+
+You may improve this structure if necessary, but maintain clear separation of concerns.
+
+Do not put the entire application in one giant page or component.
+
+Do not mix database access, UI logic and AI prompts in the same file.
+
+Use reusable components and typed interfaces.
+
+PART 14 — SECURITY AND RESPONSIBLE AI
+
+These are mandatory requirements, not optional future features.
+
+1. Use only authorised project sources.
+2. Use synthetic data for the demonstration.
+3. Validate uploads and enforce reasonable size limits.
+4. Keep API keys on the server.
+5. Do not expose credentials in frontend code.
+6. Enforce role and source permissions on the server.
+7. Restrict access to uploaded files.
+8. Validate AI outputs.
+9. Treat document content as untrusted input.
+10. Protect against prompt injection in uploaded documents.
+11. Never treat document instructions as system instructions.
+12. Prevent unsupported AI assumptions from being marked verified.
+13. Maintain evidence references.
+14. Allow human correction and rejection.
+15. Maintain an auditable approval history.
+16. Do not expose confidential data in generated handovers.
+17. Do not claim integrations exist when they do not.
+
+Clearly explain the limitations of the AI model.
+
+PART 15 — END-TO-END JUDGE DEMONSTRATION
+
+A judge must be able to complete this exact journey:
+
+1. Open the deployed application.
+2. Sign in using a provided demo account.
+3. Open Campus Innovation Portal.
+4. Explore the existing project dashboard.
+5. Navigate to Knowledge Sources.
+6. Upload a sample document.
+7. See the actual extraction and processing status.
+8. Open the extracted source content.
+9. Run knowledge reconstruction.
+10. Explore the extracted decisions, tasks, risks and unresolved questions.
+11. Click a knowledge claim.
+12. Inspect its supporting source excerpt.
+13. See conflicting and missing information.
+14. Open the Continuity Risk Radar.
+15. Run the Departure / Absence Drill.
+16. Create a handover.
+17. Select the incoming successor and permitted information scope.
+18. Generate the handover.
+19. Edit a claim.
+20. Review and approve the handover.
+21. Share it with the authorised successor.
+22. Sign in as the successor.
+23. Open the received handover.
+24. Explore permitted evidence.
+25. Acknowledge receipt.
+26. View the continuation checklist.
+
+This journey must work.
+
+If a feature cannot be completed reliably, clearly label it as unavailable or planned. Do not simulate completion with fake notifications.
+
+PART 16 — TESTING AND DOCUMENTATION
+
+Create automated tests for:
+
+- Authentication.
+- Upload validation.
+- Document extraction.
+- Knowledge extraction.
+- Evidence references.
+- Permission checks.
+- Claim review.
+- Handover approval.
+- Controlled sharing.
+- Successor acknowledgement.
+
+Test failure cases:
+
+- Invalid files.
+- Empty documents.
+- Duplicate uploads.
+- Missing AI API key.
+- AI API failure.
+- Malformed AI output.
+- Conflicting sources.
+- Missing evidence.
+- Unauthorised access.
+- Expired handover access.
+
+Create complete documentation.
+
+README must explain:
+
+- Product overview.
+- Features.
+- Technology stack.
+- Prerequisites.
+- Installation.
+- Environment variables.
+- Database setup.
+- Demo credentials.
+- Development commands.
+- Testing.
+- Deployment.
+- Known limitations.
+
+Architecture documentation must explain actual data flow.
+
+Create an AI disclosure document identifying the AI model, APIs, external libraries and AI-assisted development.
+
+Do not invent testing results, user interviews or integrations.
+
+PART 17 — DEPLOYMENT
+
+Prepare the application for a straightforward deployment.
+
+Use a compatible hosting approach such as Vercel or another suitable platform.
+
+Document any persistence requirements.
+
+Do not assume local SQLite file storage will persist on a serverless deployment.
+
+If production deployment requires PostgreSQL, provide a clear configuration path.
+
+Include:
+
+- Environment configuration.
+- Database migration instructions.
+- Demo seed instructions.
+- Build command.
+- Start command.
+- Deployment notes.
+
+The application must run locally before deployment.
+
+PART 18 — DEVELOPMENT EXECUTION RULES
+
+Follow these instructions carefully.
+
+1. First inspect the available project directory and existing files.
+2. If an existing ContinuityOS codebase is present, preserve and improve it rather than blindly overwriting it.
+3. If no existing project is present, initialise the project cleanly.
+4. Check Node.js, npm and available development tools.
+5. Install compatible dependencies.
+6. Create the actual files.
+7. Implement the database schema.
+8. Implement the backend.
+9. Implement real document ingestion.
+10. Implement knowledge reconstruction.
+11. Implement evidence linking.
+12. Implement review and approval.
+13. Implement permission-aware handover sharing.
+14. Build the frontend.
+15. Create synthetic demo data.
+16. Run database migrations.
+17. Run tests.
+18. Run the production build.
+19. Fix TypeScript, lint, runtime and build errors.
+20. Verify the complete judge journey.
+
+Do not stop after creating the folder structure.
+
+Do not give me only sample code or instructions.
+
+Actually implement the application in the available workspace.
+
+If the environment does not permit a particular operation, explain the limitation and provide the exact command I should execute.
+
+PART 19 — PRIORITY ORDER FOR LIMITED DEVELOPMENT TIME
+
+Do not sacrifice the central workflow to create too many secondary features.
+
+Priority 1:
+
+- Working application shell.
+- Authentication and demo accounts.
+- Project creation and selection.
+- Real document upload and extraction.
+- Knowledge reconstruction.
+- Evidence-linked claims.
+- Review and approval.
+- Controlled handover sharing.
+- Successor acknowledgement.
+
+Priority 2:
+
+- Risk analysis.
+- Decision timeline.
+- Departure / Absence Drill.
+- Successor readiness.
+- Audit log.
+
+Priority 3:
+
+- Advanced analytics.
+- Additional integrations.
+- Extended customisation.
+
+A smaller, fully working workflow is more valuable than 20 incomplete modules.
+
+FINAL ACCEPTANCE CRITERIA
+
+Before declaring development complete, verify:
+
+[ ] Application starts successfully.
+
+[ ] No critical runtime errors.
+
+[ ] No TypeScript build errors.
+
+[ ] Database is operational.
+
+[ ] Synthetic demo project is available.
+
+[ ] Documents can actually be uploaded.
+
+[ ] Documents can actually be extracted.
+
+[ ] AI analysis uses real extracted content when configured.
+
+[ ] Fallback behaviour works when AI is unavailable.
+
+[ ] Extracted claims have real source references.
+
+[ ] Missing and conflicting evidence is visible.
+
+[ ] Reviewers can edit and approve handovers.
+
+[ ] Unapproved handovers cannot be shared.
+
+[ ] Access restrictions are enforced server-side.
+
+[ ] Successors can access their permitted handovers.
+
+[ ] Acknowledgement works.
+
+[ ] Light and dark themes work.
+
+[ ] Responsive layouts work.
+
+[ ] Navigation and interactive controls work.
+
+[ ] Logo assets are included.
+
+[ ] README and technical documentation are complete.
+
+[ ] Three Round 3 commitments are documented.
+
+[ ] AI and external-service disclosures are accurate.
+
+[ ] The complete judge demonstration journey works.
+
+FINAL INSTRUCTION
+
+Think like a senior engineer who is accountable for delivering a real product, not a developer who is trying to finish a visually attractive assignment.
+
+Make sound architectural decisions.
+
+Keep the interface polished, colourful, accessible and intuitive.
+
+Keep the code modular, readable and maintainable.
+
+Do not invent functionality.
+
+Do not fabricate evidence.
+
+Do not confuse AI-generated assumptions with verified facts.
+
+Do not prioritise visual decoration over the working product.
+
+The final result must demonstrate one compelling thing:
+
+Even when an important team member leaves, the knowledge needed to continue the work remains accessible, traceable, verified and actionable.
+
+Build ContinuityOS accordingly.

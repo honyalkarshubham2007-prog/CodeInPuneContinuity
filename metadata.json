@@ -1,0 +1,6 @@
+{
+  "name": "ContinuityOS",
+  "description": "Intelligent knowledge continuity platform that reconstructs project knowledge from scattered activity and documents to generate evidence-backed handovers when team members leave.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

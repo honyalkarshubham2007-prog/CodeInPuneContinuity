@@ -1,0 +1,334 @@
+// ContinuityOS - Relational Prisma Schema
+// Provider configured for SQLite for local MVP, designed for zero-friction migration to PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  OWNER
+  REVIEWER
+  SUCCESSOR
+  VIEWER
+}
+
+enum VerificationStatus {
+  VERIFIED
+  INFERRED
+  CONFLICTING
+  MISSING
+  UNKNOWN
+}
+
+enum RiskSeverity {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum RiskStatus {
+  OPEN
+  UNDER_REVIEW
+  RESOLVED
+  ACCEPTED
+}
+
+enum HandoverStatus {
+  DRAFT
+  IN_REVIEW
+  CHANGES_REQUESTED
+  APPROVED
+  SHARED
+  ACKNOWLEDGED
+}
+
+enum SourceClassification {
+  PUBLIC
+  INTERNAL
+  CONFIDENTIAL
+}
+
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  name            String
+  role            UserRole         @default(VIEWER)
+  roleTitle       String
+  avatar          String
+  department      String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  
+  memberships     ProjectMembership[]
+  uploadedSources Source[]
+  assignedTasks   Task[]
+  handoversAsLead Handover[]       @relation("OutgoingLead")
+  handoversAsNext Handover[]       @relation("IncomingSuccessor")
+  activityLogs    ActivityLog[]
+  reviewActions   ReviewAction[]
+  acknowledgements Acknowledgement[]
+}
+
+model Project {
+  id              String           @id @default(uuid())
+  name            String
+  tagline         String
+  description     String
+  department      String
+  status          String           @default("in_transition")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  memberships     ProjectMembership[]
+  sources         Source[]
+  decisions       Decision[]
+  tasks           Task[]
+  risks           Risk[]
+  dependencies    Dependency[]
+  questions       UnresolvedQuestion[]
+  contacts        Contact[]
+  handovers       Handover[]
+  activityLogs    ActivityLog[]
+}
+
+model ProjectMembership {
+  id        String   @id @default(uuid())
+  projectId String
+  userId    String
+  role      UserRole
+  joinedAt  DateTime @default(now())
+
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+}
+
+model Source {
+  id              String               @id @default(uuid())
+  projectId       String
+  uploadedById    String
+  filename        String
+  fileType        String
+  size            Int
+  classification  SourceClassification @default(INTERNAL)
+  status          String               @default("processed")
+  wordCount       Int                  @default(0)
+  checksum        String
+  rawText         String
+  createdAt       DateTime             @default(now())
+
+  project         Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  uploadedBy      User                 @relation(fields: [uploadedById], references: [id])
+  excerpts        SourceExcerpt[]
+}
+
+model SourceExcerpt {
+  id           String   @id @default(uuid())
+  sourceId     String
+  sectionTitle String
+  pageNumber   Int?
+  text         String
+  charOffset   Int?
+  createdAt    DateTime @default(now())
+
+  source       Source   @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+}
+
+model Decision {
+  id                  String             @id @default(uuid())
+  projectId           String
+  title               String
+  description         String
+  reasoning           String
+  decisionMaker       String
+  date                String
+  category            String
+  verificationStatus  VerificationStatus @default(VERIFIED)
+  evidenceSourceTitle String
+  evidenceExcerpt     String
+  createdAt           DateTime           @default(now())
+
+  project             Project            @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Task {
+  id                  String             @id @default(uuid())
+  projectId           String
+  name                String
+  description         String
+  ownerId             String?
+  ownerName           String
+  deadline            String
+  status              String             @default("not_started")
+  verificationStatus  VerificationStatus @default(VERIFIED)
+  evidenceSourceTitle String
+  evidenceExcerpt     String
+  createdAt           DateTime           @default(now())
+
+  project             Project            @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  owner               User?              @relation(fields: [ownerId], references: [id])
+}
+
+model Risk {
+  id                  String       @id @default(uuid())
+  projectId           String
+  title               String
+  description         String
+  severity            RiskSeverity @default(HIGH)
+  severityReason      String
+  potentialImpact     String
+  supportingEvidence  String
+  evidenceSourceTitle String
+  mitigation          String
+  status              RiskStatus   @default(OPEN)
+  assignedReviewer    String
+  resolutionNote      String?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  project             Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Dependency {
+  id                     String   @id @default(uuid())
+  projectId              String
+  dependentTask          String
+  requiredTaskOrResource String
+  relationship           String
+  supportingEvidence     String
+  isBlocked              Boolean  @default(false)
+  createdAt              DateTime @default(now())
+
+  project                Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model UnresolvedQuestion {
+  id                 String   @id @default(uuid())
+  projectId          String
+  question           String
+  whyItMatters       String
+  relatedSourceTitle String
+  suggestedVerifier  String
+  status             String   @default("unresolved")
+  resolution         String?
+  createdAt          DateTime @default(now())
+
+  project            Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Contact {
+  id              String   @id @default(uuid())
+  projectId       String
+  name            String
+  role            String
+  context         String
+  email           String
+  sourceReference String
+  createdAt       DateTime @default(now())
+
+  project         Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Handover {
+  id                  String         @id @default(uuid())
+  projectId           String
+  outgoingUserId      String
+  successorUserId     String
+  title               String
+  permittedScope      String         @default("full")
+  status              HandoverStatus @default(DRAFT)
+  currentVersion      Int            @default(1)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  approvedAt          DateTime?
+  approvedBy          String?
+  sharedAt            DateTime?
+  acknowledgedAt      DateTime?
+
+  project             Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  outgoingUser        User           @relation("OutgoingLead", fields: [outgoingUserId], references: [id])
+  successorUser       User           @relation("IncomingSuccessor", fields: [successorUserId], references: [id])
+  claims              HandoverClaim[]
+  versions            HandoverVersion[]
+  reviewActions       ReviewAction[]
+  acknowledgement     Acknowledgement?
+}
+
+model HandoverClaim {
+  id                  String             @id @default(uuid())
+  handoverId          String
+  section             String
+  title               String
+  content             String
+  verificationStatus  VerificationStatus @default(VERIFIED)
+  evidenceSourceTitle String
+  evidenceExcerpt     String
+  pageOrSection       String?
+  reviewerNotes       String?
+  isApproved          Boolean            @default(false)
+  isRejected          Boolean            @default(false)
+  isEdited            Boolean            @default(false)
+  conflictDetails     String?
+  createdAt           DateTime           @default(now())
+
+  handover            Handover           @relation(fields: [handoverId], references: [id], onDelete: Cascade)
+}
+
+model HandoverVersion {
+  id                  String   @id @default(uuid())
+  handoverId          String
+  versionNumber       Int
+  changeSummary       String
+  snapshotClaimsCount Int
+  createdBy           String
+  createdAt           DateTime @default(now())
+
+  handover            Handover @relation(fields: [handoverId], references: [id], onDelete: Cascade)
+}
+
+model ReviewAction {
+  id         String   @id @default(uuid())
+  handoverId String
+  userId     String
+  action     String
+  comment    String
+  createdAt  DateTime @default(now())
+
+  handover   Handover @relation(fields: [handoverId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Acknowledgement {
+  id          String   @id @default(uuid())
+  handoverId  String   @unique
+  userId      String
+  timestamp   DateTime @default(now())
+  signoffNote String
+  checklistCompleted Boolean @default(true)
+
+  handover    Handover @relation(fields: [handoverId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model ActivityLog {
+  id         String   @id @default(uuid())
+  projectId  String
+  userId     String?
+  actorName  String
+  actorRole  UserRole
+  action     String
+  entityType String
+  entityName String
+  details    String
+  timestamp  DateTime @default(now())
+
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user       User?    @relation(fields: [userId], references: [id])
+}
